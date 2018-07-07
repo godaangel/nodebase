@@ -23,7 +23,6 @@ router.get('/detail/:id', function(req, res, next) {
 	let id = req.params.id
 
   let user = new User();
-  console.log(Render)
 
   let getUserInfo = async function() {
     let info = await user.userInfo({id: id});
