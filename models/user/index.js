@@ -33,16 +33,12 @@ class User {
 			        if (result) {
 			          var total = result[0].total || 0;
 			          result = {
-			            ret: 0,
-			            msg: 'ok',
-			            data: {
-			              list: list,
-			              pagination: {
-			                currentPage: params.currentPage ? parseInt(params.currentPage) : 0,
-			                pageSize: pageSize,
-			                total: total
-			              }
-			            }
+			            list: list,
+		              pagination: {
+		                currentPage: params.currentPage ? parseInt(params.currentPage) : 0,
+		                pageSize: pageSize,
+		                total: total
+		              }
 			          };
 			        }
 			        resolve(result);
