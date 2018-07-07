@@ -24,10 +24,11 @@ class User {
 			let pagination = await Query('select found_rows() as total');
 			let result = {
 				list: list,
-				pagination: Object.assign(pagination, {
+				pagination: {
 					currentPage: params.currentPage,
-					pageSize: pageSize
-				})
+					pageSize: pageSize,
+					total: pagination[0].total
+				}
 			};
 			return result;
 		}
