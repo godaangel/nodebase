@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// var fs = require('fs');
+// var FileStreamRotator = require('file-stream-rotator');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -13,9 +16,28 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// //设置日志文件目录
+// var logDirectory = __dirname + '/logs';
+// //确保日志文件目录存在 没有则创建
+// fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+
+// //创建一个写路由
+// var accessLogStream = FileStreamRotator.getStream({
+//   filename: logDirectory + '/accss-%DATE%.log',
+//   frequency: 'daily',
+//   verbose: false
+// })
+// //写入日志文件
+// app.use(logger('combined', {
+//   stream: accessLogStream
+// }));
+
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

@@ -5,7 +5,6 @@
 // 引入查询模块
 let Query = require('../../libs/query');
 let userSql = require('../../dao/user/index');
-let Md5 = require('../../libs/md5');
 
 class User {
 	/**
@@ -40,8 +39,8 @@ class User {
 	 * @Author   warrenyang@tencent.com
 	 * @DateTime 2018-07-07
 	 */
-	userInfo(params){
-		return Query(userSql.queryById, [params.id]);
+	userInfo(...params){
+		return Query(userSql.queryById, [...params]);
 	}
 
 	/**
@@ -49,9 +48,9 @@ class User {
 	 * @Author   warrenyang@tencent.com
 	 * @DateTime 2018-07-07
 	 */
-	add(params){
+	add(...params){
 		let timestamp = new Date().getTime();
-		return Query(userSql.insert, [params.username, Md5.md5(params.password), timestamp, timestamp]);
+		return Query(userSql.insert, [...params, timestamp, timestamp]);
 	}
 
 	/**
@@ -59,8 +58,8 @@ class User {
 	 * @Author   warrenyang@tencent.com
 	 * @DateTime 2018-07-07
 	 */
-	delete(params){
-		return Query(userSql.delete, [params.id]);
+	delete(...params){
+		return Query(userSql.delete, [...params]);
 	}
 
 }
