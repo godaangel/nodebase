@@ -11,7 +11,7 @@ class User extends Base{
 	constructor() {
     super(userSql)
 	}
-	
+
 	/**
 	 * 获取用户列表, 此处通过Base继承了list方法
 	 * @Author   warrenyang@tencent.com
@@ -19,32 +19,32 @@ class User extends Base{
 	 */
 
 	/**
-	 * 查询用户信息
+	 * 查询用户信息, 此处通过Base继承了getById方法
 	 * @Author   warrenyang@tencent.com
 	 * @DateTime 2018-07-07
 	 */
-	userInfo(...params){
-		return Query(userSql.queryById, [...params]);
-	}
+	// userInfo(...params){
+	// 	return Query(userSql.queryById, [...params]);
+	// }
 
 	/**
-	 * 新增用户
+	 * 新增用户, 此处通过Base继承了insert方法, 并做了复写, 加入时间戳, 并通过super方法调用了父类方法
 	 * @Author   warrenyang@tencent.com
 	 * @DateTime 2018-07-07
 	 */
-	add(...params){
+	insert(...params){
 		let timestamp = new Date().getTime();
-		return Query(userSql.insert, [...params, timestamp, timestamp]);
+		return super.insert([...params, timestamp, timestamp])
 	}
 
 	/**
-	 * 删除用户
+	 * 删除用户, 此处通过Base继承了delete方法
 	 * @Author   warrenyang@tencent.com
 	 * @DateTime 2018-07-07
 	 */
-	delete(...params){
-		return Query(userSql.delete, [...params]);
-	}
+	// delete(...params){
+	// 	return Query(userSql.delete, [...params]);
+	// }
 
 }
 

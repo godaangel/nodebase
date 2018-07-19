@@ -56,7 +56,7 @@ router.get('/add', function(req, res, next) {
   let { username, password } = req.query;
 
   let addUser = async function() {
-  	let info = await user.add(username, Md5.md5(password));
+  	let info = await user.insert(username, Md5.md5(password));
 	  Render.success(res, info);
   }
 

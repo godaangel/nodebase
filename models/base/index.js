@@ -38,6 +38,19 @@ class Base {
 		}
 		return getList()
 	}
+
+	getById(id) {
+		return Query(this.querySql.getById, [id])
+	}
+
+	insert(params){
+		console.log(params)
+		return Query(this.querySql.insert, params);
+	}
+
+	delete(id){
+		return Query(userSql.delete, [id]);
+	}
 }
 
 module.exports = Base
