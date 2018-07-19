@@ -3,9 +3,9 @@
  * @type {[type]}
  */
 // 引入查询模块
-let Query = require('../../libs/query');
-let userSql = require('../../dao/user/index');
-let Base = require('../base/index');
+let Query = require('../../libs/query')
+let userSql = require('../../dao/user/index')
+let Base = require('../base/index')
 
 class User extends Base{
 	constructor() {
@@ -33,7 +33,7 @@ class User extends Base{
 	 * @DateTime 2018-07-07
 	 */
 	insert(...params){
-		let timestamp = new Date().getTime();
+		let timestamp = new Date().getTime()
 		return super.insert([...params, timestamp, timestamp])
 	}
 
@@ -48,4 +48,4 @@ class User extends Base{
 
 }
 
-module.exports = User;
+module.exports = User

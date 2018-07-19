@@ -36,11 +36,12 @@ router.get('/detail/:id', function(req, res, next) {
   let user = new User();
 
   let getUserInfo = async function() {
-    let info = await user.userInfo(id);
+    let info = await user.getById(id);
     if(!info[0]){
     	Render.err(res, '没有找到该用户');
+    }else{
+      Render.success(res, info[0]);
     }
-    Render.success(res, info[0]);
   }
 
   getUserInfo().catch((err) => {
@@ -62,6 +63,26 @@ router.get('/add', function(req, res, next) {
 
   addUser().catch((err) => {
   	Render.err(res, err);
+  });
+ 
+});
+
+router.get('/update', function(req, res, next) {
+  let user = new User();
+
+  // let { username, password } = req.query;
+
+  let addUser = async function() {
+    let info = await user.update({
+      username: 'godaangelupdate',
+      id: 4,
+      update_time: new Date().getTime()
+    });
+    Render.success(res, info);
+  }
+
+  addUser().catch((err) => {
+    Render.err(res, err);
   });
  
 });

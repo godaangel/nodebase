@@ -7,7 +7,6 @@
 let Query = require('../../libs/query')
 
 class Base {
-
 	constructor(querySql) {
 		this.querySql = querySql
 	}
@@ -39,17 +38,57 @@ class Base {
 		return getList()
 	}
 
+	/**
+	 * 根据Id获取详情
+	 * @Author   warrenyang@tencent.com
+	 * @DateTime 2018-07-19
+	 */
 	getById(id) {
 		return Query(this.querySql.getById, [id])
 	}
 
+	/**
+	 * 插入一条数据
+	 * @Author   warrenyang@tencent.com
+	 * @DateTime 2018-07-19
+	 * @param    {Array}               params 参数顺序数组
+	 */
 	insert(params){
-		console.log(params)
-		return Query(this.querySql.insert, params);
+		return Query(this.querySql.insert, params)
 	}
 
+	/**
+	 * 更新一条数据
+	 * @Author   warrenyang@tencent.com
+	 * @DateTime 2018-07-19
+	 * @version  [version]
+	 * @param    {Object}               params key-value模式的参数，必须包含id
+	 */
+	update(params){
+		let str = ''
+		let valueArr = [] //存值数组
+		for(let key in params){
+			if(key !== 'id' && key !== 'dbname'){
+				str += `,${key} = ? `
+				valueArr.push(params[key])
+			}
+		}
+		str = str.replace(',', '')
+
+		// 拼接sql语句，此处要考虑是否有注入风险
+		let updateSql = `update ${this.querySql.dbname} set ${str} where id = ?`
+		valueArr.push(params.id)
+
+		return Query(updateSql, valueArr);
+	}
+
+	/**
+	 * 删除一条数据
+	 * @Author   warrenyang@tencent.com
+	 * @DateTime 2018-07-19
+	 */
 	delete(id){
-		return Query(userSql.delete, [id]);
+		return Query(userSql.delete, [id])
 	}
 }
 
