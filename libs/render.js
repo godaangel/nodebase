@@ -14,10 +14,12 @@ class Render {
 			msg: 'ok',
 			code: 200,
 			data: content
-		});
+		})
 	}
 
 	static err(res, content, errCode, type = 'json') {
+		console.log('【Error】', content)
+		// 此处留个疑问，如何全部展示出content报错内容
 		res[type]({
 			ret: 1,
 			msg: `${content}`,
@@ -26,4 +28,4 @@ class Render {
 	}
 }
 
-module.exports = Render;
+module.exports = Render

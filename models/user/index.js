@@ -5,34 +5,18 @@
 // 引入查询模块
 let Query = require('../../libs/query');
 let userSql = require('../../dao/user/index');
+let Base = require('../base/index');
 
-class User {
+class User extends Base{
+	constructor() {
+    super(userSql)
+	}
+	
 	/**
-	 * 获取用户列表
+	 * 获取用户列表, 此处通过Base继承了list方法
 	 * @Author   warrenyang@tencent.com
 	 * @DateTime 2018-07-07
 	 */
-	list(params) {
-		// 分页大小
-		let pageSize = params.pageSize || 20;
-		// 当前开始查询数
-		let from = (params.currentPage ? (params.currentPage - 1) : 0) * pageSize;
-
-		let getList = async function(){
-			let list = await Query(userSql.queryAll, [from, pageSize]);
-			let pagination = await Query('select found_rows() as total');
-			let result = {
-				list: list,
-				pagination: {
-					currentPage: params.currentPage,
-					pageSize: pageSize,
-					total: pagination[0].total
-				}
-			};
-			return result;
-		}
-		return getList();
-	}
 
 	/**
 	 * 查询用户信息
