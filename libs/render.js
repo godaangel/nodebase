@@ -23,7 +23,7 @@ class Render {
 		res[type]({
 			ret: 1,
 			msg: `${content}`,
-			code: errCode || 1
+			code: content.errno || errCode || 1
 		})
 	}
 }

@@ -20,7 +20,11 @@ router.get('/list', function(req, res, next) {
   let getUserList = async function() {
   	let list = await user.list({
 	    currentPage: 1,
-	    pageSize: 20
+	    pageSize: 20,
+      'username.like': '',
+      orderBy: {
+        create_time: 'desc'
+      }
 	  });
   	Render.success(res, list);
   }
@@ -57,7 +61,10 @@ router.get('/add', function(req, res, next) {
   let { username, password } = req.query;
 
   let addUser = async function() {
-  	let info = await user.insert(username, Md5.md5(password));
+  	let info = await user.insert({
+      username: username, 
+      password: Md5.md5(password)
+    });
 	  Render.success(res, info);
   }
 
@@ -72,16 +79,21 @@ router.get('/update', function(req, res, next) {
 
   // let { username, password } = req.query;
 
-  let addUser = async function() {
+  let updateUser = async function() {
     let info = await user.update({
-      username: 'godaangelupdate',
-      id: 4,
+      username: 'godaangelupdate2',
+      id: 1,
       update_time: new Date().getTime()
     });
-    Render.success(res, info);
+
+    if(info.affectedRows){
+      Render.success(res, info)
+    }else{
+      Render.err(res, '没有找到该用户')
+    }
   }
 
-  addUser().catch((err) => {
+  updateUser().catch((err) => {
     Render.err(res, err);
   });
  

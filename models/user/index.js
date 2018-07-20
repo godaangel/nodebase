@@ -9,7 +9,8 @@ let Base = require('../base/index')
 
 class User extends Base{
 	constructor() {
-    super(userSql)
+		let tableName = 'user'
+    super(tableName)
 	}
 
 	/**
@@ -32,9 +33,14 @@ class User extends Base{
 	 * @Author   warrenyang@tencent.com
 	 * @DateTime 2018-07-07
 	 */
-	insert(...params){
+	insert(params){
 		let timestamp = new Date().getTime()
-		return super.insert([...params, timestamp, timestamp])
+		return super.insert({
+			username: params.username, 
+      password: params.password,
+      create_time: timestamp,
+      update_time: timestamp
+		})
 	}
 
 	/**
