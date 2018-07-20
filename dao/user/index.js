@@ -1,4 +1,4 @@
 var userSql = {
-	dbname: 'user'
+	insert: 'insert sql demo ...'
 }
 module.exports = userSql

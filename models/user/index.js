@@ -4,8 +4,11 @@
  */
 // 引入查询模块
 let Query = require('../../libs/query')
-let userSql = require('../../dao/user/index')
+
 let Base = require('../base/index')
+
+//这个引入主要是用来写【带占位符的SQL语句】，在这个Model里其实没啥用了，如果没有特殊的SQL查询，可以不引入
+let userSql = require('../../dao/user/index')
 
 class User extends Base{
 	constructor() {
