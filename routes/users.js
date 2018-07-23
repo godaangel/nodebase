@@ -14,7 +14,6 @@ let Md5 = require('../libs/md5');
 // //确保日志文件目录存在 没有则创建
 // fs.existsSync(logDirectory)||fs.mkdirSync(logDirectory);
 
-
 router.get('/list', function(req, res, next) {
   let user = new User();
   let getUserList = async function() {
