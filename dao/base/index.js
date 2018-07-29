@@ -20,7 +20,7 @@ class BaseDao {
   list(params) {
     let that = this
       // 分页大小
-    let pageSize = params.pageSize || 20
+    let pageSize = params.pageSize ? parseInt(params.pageSize) : 20
       // 当前开始查询数
     let from = (params.currentPage ? (params.currentPage - 1) : 0) * pageSize
 
